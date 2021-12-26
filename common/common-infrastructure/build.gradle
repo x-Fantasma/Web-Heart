@@ -1,0 +1,23 @@
+plugins {
+	id 'java'
+}
+
+group = 'co.fanti'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation project.ext.springbootweb
+	runtimeOnly project.ext.springdevtools
+	
+	implementation project(':common:common-domain')
+}
+
+test {
+	useJUnitPlatform()
+}

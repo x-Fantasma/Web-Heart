@@ -1,0 +1,20 @@
+rootProject.name = 'heart'
+
+include ':application'
+include ':domain'
+include ':infrastructure'
+
+include ':common',
+                    ':common:common-application',
+                    ':common:common-domain',
+                    ':common:common-infrastructure',
+                    ':common:common-test'
+
+project(':common').projectDir = new File('../common')
+
+project(':common:common-application').projectDir = new File('../common/common-application')
+project(':common:common-domain').projectDir = new File('../common/common-domain')
+project(':common:common-infrastructure').projectDir = new File('../common/common-infrastructure')
+project(':common:common-test').projectDir = new File('../common/common-test')
+
+

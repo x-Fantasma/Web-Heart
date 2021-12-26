@@ -1,0 +1,78 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+allprojects {
+
+	repositories {
+		mavenCentral()
+	}
+
+
+	/** Apache **/
+	project.ext.apachecommons = [
+		'commons-io:commons-io:2.11.0',
+		'org.apache.commons:commons-lang3:3.7'
+	]
+
+	/** Web **/
+	project.ext.springbootweb = [ 'org.springframework.boot:spring-boot-starter-web:${springBootVersion}' ]
+	project.ext.springdevtools = [ 'org.springframework.boot:spring-boot-devtools:${springBootVersion}' ]
+
+	/** Lombok **/
+	project.ext.lombok = [ 'org.projectlombok:lombok:1.18.20' ]
+
+
+	// Excludes JUnit4
+	configurations { runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'}
+
+	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
+
+}
+
+group = 'co.fanti'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation project.ext.springbootweb
+	runtimeOnly project.ext.springdevtools
+
+	implementation project(':infrastructure')
+
+	configurations {
+		runtime.exclude module: 'spring-boot-starter-tomcat'
+		compile.exclude module: 'spring-boot-starter-tomcat'
+	}
+}
+
+bootJar {
+	mainClass.set('co.fanti.Application')
+	launchScript()
+}
+
+springBoot {
+	buildInfo {
+		properties {
+			name = "heart"
+			version = version
+		}
+	}
+}

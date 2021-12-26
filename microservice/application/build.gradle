@@ -1,0 +1,20 @@
+plugins {
+	id 'java'
+}
+
+group = 'co.fanti'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation project(':domain')
+	implementation project(':common:common-application')
+
+	compileOnly project.ext.lombok
+	annotationProcessor project.ext.lombok
+}

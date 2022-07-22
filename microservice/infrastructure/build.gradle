@@ -1,6 +1,4 @@
-plugins {
-	id 'java'
-}
+apply plugin: 'java'
 
 group = 'co.fanti'
 version = '0.0.1-SNAPSHOT'
@@ -11,6 +9,17 @@ repositories {
 }
 
 dependencies {
+
+	implementation project.ext.springbootweb
+
+	testImplementation project.ext.springboottest
+	testImplementation project.ext.mockitocore
+	testImplementation project.ext.mockitoinline
+	testImplementation project.ext.mockitojupiter
+
+	implementation project.ext.apachecommons
+	implementation project.ext.springbootjdbc
+	runtimeOnly project.ext.db
 	
 	implementation project(':domain')
 	implementation project(':application')

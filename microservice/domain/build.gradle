@@ -1,6 +1,4 @@
-plugins {
-	id 'java'
-}
+apply plugin: 'java'
 
 group = 'co.fanti'
 version = '0.0.1-SNAPSHOT'
@@ -13,6 +11,11 @@ repositories {
 dependencies {
 
 	implementation project(':common:common-domain')
+
+	testImplementation project.ext.springboottest
+	testImplementation project.ext.mockitocore
+	testImplementation project.ext.mockitoinline
+	testImplementation project.ext.mockitojupiter
 
 	compileOnly project.ext.lombok
 	annotationProcessor project.ext.lombok

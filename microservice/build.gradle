@@ -1,15 +1,5 @@
-buildscript {
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-
-	}
-}
-
 plugins {
 	id 'org.springframework.boot' version "${springBootVersion}"
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
@@ -27,19 +17,37 @@ allprojects {
 	]
 
 	/** Web **/
-	project.ext.springbootweb = [ 'org.springframework.boot:spring-boot-starter-web:${springBootVersion}' ]
-	project.ext.springdevtools = [ 'org.springframework.boot:spring-boot-devtools:${springBootVersion}' ]
+	project.ext.springbootweb = [ "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" ]
+	project.ext.springdevtools = [ "org.springframework.boot:spring-boot-devtools:${springBootVersion}" ]
+
+	/** JDBC **/
+	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"]
 
 	/** Lombok **/
 	project.ext.lombok = [ 'org.projectlombok:lombok:1.18.20' ]
+
+	/** Database   **'mysql:mysql-connector-java'**    **/
+	project.ext.db = [ 'org.postgresql:postgresql:42.3.3'  ]
+
+	/** Hikari **/
+	project.ext.hikari = [ 'com.zaxxer:HikariCP:5.0.1' ]
+
+	/** Flyway **/
+	project.ext.flyway = [ 'org.flywaydb:flyway-core:5.2.1' ]
 
 
 	// Excludes JUnit4
 	configurations { runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'}
 
+	/** Test **/
+	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
+		/** Mockito **/
+	project.ext.mockitocore = ['org.mockito:mockito-core:3.11.2']
+	project.ext.mockitoinline = ['org.mockito:mockito-inline:3.11.2']
+	project.ext.mockitojupiter = ['org.mockito:mockito-junit-jupiter:3.11.2']
+
 	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
-
 }
 
 group = 'co.fanti'
@@ -54,6 +62,8 @@ dependencies {
 
 	implementation project.ext.springbootweb
 	runtimeOnly project.ext.springdevtools
+
+	implementation project.ext.flyway
 
 	implementation project(':infrastructure')
 

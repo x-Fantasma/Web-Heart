@@ -1,15 +1,12 @@
-plugins {
-	id 'java'
-}
+allprojects {
 
-repositories {
-	mavenCentral()
-}
+	repositories {
+		mavenCentral()
+	}
 
-dependencies {
+	/** Jasypt **/
+	project.ext.springbootjasypt = [ 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' ]
 
-}
-
-test {
-	useJUnitPlatform()
+	/** Hikari **/
+	project.ext.hikari = [ 'com.zaxxer:HikariCP:5.0.1' ]
 }

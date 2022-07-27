@@ -4,9 +4,16 @@ allprojects {
 		mavenCentral()
 	}
 
+	/** Spring **/
+		/** TX **/
+	project.ext.springtx = [ "org.springframework:spring-tx:${springVersion}" ]
+
 	/** Jasypt **/
 	project.ext.springbootjasypt = [ 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' ]
 
 	/** Hikari **/
 	project.ext.hikari = [ 'com.zaxxer:HikariCP:5.0.1' ]
+
+	/** Lombok **/
+	project.ext.lombok = [ 'org.projectlombok:lombok:1.18.20' ]
 }

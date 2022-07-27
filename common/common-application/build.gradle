@@ -11,5 +11,7 @@ repositories {
 }
 
 dependencies {
-	
+
+	implementation project.ext.springtx
+	implementation project.ext.lombok
 }

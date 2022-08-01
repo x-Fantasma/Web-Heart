@@ -13,8 +13,8 @@ public class FieldCallbackSql implements ReflectionUtils.FieldCallback {
 
     public static final String YOU_MUST_ENTER_THE_NAME_OF_THE_FOLDER_OF_THE_SQL = "Se debe ingresar el nombre de la carpeta del sql";
     public static final String YOU_MUST_ENTER_THE_NAME_OF_THE_SQL = "Se debe ingresar el nombre del sql";
-    public static final String SQL_FILE_NOT_FOUND = "No se enconro el archivo sql";
-    private final static String SQL_PATH = "sql/";
+    public static final String SQL_FILE_NOT_FOUND = "No se encontró el archivo sql";
+    private final static String SQL_PATH = "sql/%s/%s";
     private final static String SQL_EXTENSION = ".sql";
 
     private Object object;
@@ -38,7 +38,7 @@ public class FieldCallbackSql implements ReflectionUtils.FieldCallback {
         validateValue(folder, YOU_MUST_ENTER_THE_NAME_OF_THE_FOLDER_OF_THE_SQL);
         validateValue(sql, YOU_MUST_ENTER_THE_NAME_OF_THE_SQL);
 
-        var sqlPath = SQL_PATH + folder;
+        var sqlPath = String.format(SQL_PATH, folder, sql);
 
         if(!sql.contains(SQL_EXTENSION)) {
             sqlPath += SQL_EXTENSION;
@@ -52,10 +52,11 @@ public class FieldCallbackSql implements ReflectionUtils.FieldCallback {
             }
 
             field.set(object, IOUtils.toString(sqlStream, StandardCharsets.UTF_8.name()));
-            field.canAccess(false);
 
         } catch (IOException exception) {
             throw new ExceptionTechnical(SQL_FILE_NOT_FOUND, exception);
+        }finally {
+            field.setAccessible(false);
         }
     }
 

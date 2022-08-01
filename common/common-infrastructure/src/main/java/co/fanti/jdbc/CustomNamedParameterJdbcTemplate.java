@@ -52,10 +52,11 @@ public class CustomNamedParameterJdbcTemplate {
 
                    ReflectionUtils.makeAccessible(field);
                    sqlParamSource.addValue(field.getName(), field.get(object));
-                   field.canAccess(false);
                }
            }catch (Exception e) {
                throw new ExceptionTechnical(ERROR_MAPPING_THE_NAME_AND_VALUE_OF_THE_OBJECT, e);
+           } finally {
+               field.setAccessible(false);
            }
         }
 
@@ -66,7 +67,7 @@ public class CustomNamedParameterJdbcTemplate {
         return Modifier.isStatic(field.getModifiers()) || Modifier.isFinal(field.getModifiers());
     }
 
-    private NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
+    public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {
         return this.namedParameterJdbcTemplate;
     }
 }

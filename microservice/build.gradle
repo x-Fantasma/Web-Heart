@@ -16,9 +16,11 @@ allprojects {
 		'org.apache.commons:commons-lang3:3.7'
 	]
 
-	/** Web **/
-	project.ext.springbootweb = [ "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" ]
+	/** Spring **/
 	project.ext.springdevtools = [ "org.springframework.boot:spring-boot-devtools:${springBootVersion}" ]
+	project.ext.springcontext = [ "org.springframework:spring-context:${springVersion}" ]
+		/** Web **/
+	project.ext.springbootweb = [ "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" ]
 
 	/** JDBC **/
 	project.ext.springbootjdbc = ["org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"]
@@ -34,6 +36,11 @@ allprojects {
 
 	/** Flyway **/
 	project.ext.flyway = [ 'org.flywaydb:flyway-core:5.2.1' ]
+
+	/** Jackson **/
+	project.ext.jackson = [
+			'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+	]
 
 
 	// Excludes JUnit4
